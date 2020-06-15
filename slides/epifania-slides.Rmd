@@ -1,0 +1,173 @@
+---
+title: "Scoring the implicit:"
+subtitle: "The `implicitMeasures` package"
+author: "Ottavia M. Epifania, Pasquale Anselmi, Egidio Robusto"
+date: "University of Padova (IT)"
+header-includes: 
+output:
+  ioslides_presentation: 
+    logo: userlogo.png
+    css: style.css
+    widescreen: true
+  md_document: default
+---
+
+<style>
+.forceBreak { -webkit-column-break-after: always; break-after: column; }
+</style>
+
+
+```{r setup, include=FALSE}
+
+library(implicitMeasures)
+```
+## Implicit assessment in Psychology {.columns-2}
+
+<div>
+<center>
+Implicit Association Test (IAT)
+</center>
+</br>
+How much do you like *Coke* over *Pepsi*?
+</div>
+
+
+<p class="forceBreak"></p>
+
+<div>
+<center>
+Single Category IAT (IAT)
+</center>
+</br>
+How much do you like *Coke*?
+</br>
+<center>
+OR
+</center>
+</br>
+How much do you like *Pepsi*?
+</div>
+
+## Their scores
+
+The IAT and SC-IAT effects (i.e., the difference between the associative conditions) are expressed by using the so-called *D-score*, computed as: 
+
+$$D-score = \frac{M_{conditionA} - M_{conditionB}}{sd_{pooled}}$$
+
+The steps that have to be undertaken to clean and prepare the data set for the computation make it an error prone procedure and raise replicability issues.
+
+## Why do we need an `R` package for that?
+
+- SPSS and Inquisit scripts: Not open source, Not easy to use, Bounded to specific administration procedures
+
+- `R` packages:  Require a specific column arrangement, do not provide graphical representation of the results, do not clarify which data cleaning procedures are implementing, and compute only IAT *D-score*
+
+## `implicitMeasures`
+
+It's on [CRAN](https://cran.r-project.org/web/packages/implicitMeasures/index.html)!
+
+```{r, echo=TRUE, eval=FALSE, size="huge"}
+install.packages("implicitMeasures") # Install
+```
+
+<div>
+
+```{r, echo=TRUE, eval=FALSE, size="huge"}
+library("implicitMeasures") # upload
+```
+
+</div>
+
+<div>
+...and there's a data set you can play with: 
+
+```{r, echo=TRUE, eval=FALSE, size="huge"}
+data(raw_data)
+```
+</div>
+
+## Measures specific functions {.columns-2}
+
+<div>
+<center>
+IAT
+</center>
+
+
+```{r echo =FALSE}
+iatFunctions <- data.frame(Function = c("`clean_iat()`", "`computeD()`", 
+                                        "`IATrel()`", "`multi_dscore()`"), 
+                    Description = c("Clean IAT data", "Compute IAT *D-score*", "Compute IAT realibility", "Compute & Plot multiple IAT *D-score*s"
+                                    ))
+knitr::kable(iatFunctions)
+```
+
+<p class="forceBreak"></p>
+
+<div>
+<center>
+SC-IAT
+</center>
+
+```{r echo=FALSE}
+sciatFunctions <- data.frame(Function = c("`clean_sciat()`", "`Dsciat()`", 
+                                          "`multi_dsciat()`"), 
+                    Description = c("Clean SC-IAT data", "Compute SC-IAT *D-score*", "Plot *D-scores* from two SC-IATs"))
+knitr::kable(sciatFunctions)
+```
+
+## Common functions 
+
+The objects obtained from functions `computeD()`  or `Dsciat()` can be passed to the following functions: 
+
+```{r echo=FALSE}
+commonFunctions <- data.frame(Function = c("`descript_d()`", "`d_distr()`", 
+                                           "`d_plot()`"), 
+                              Description = c("Descriptive table of the *D-score*s (even in LaTeX format!)", "Plot of the results at the individual level", "Plot of the results at the sample level"))
+knitr::kable(commonFunctions)
+
+```
+
+
+## 
+
+<h2 style="position: fixed; top:30%; left: 45%;">
+Thanks!
+</h2>
+
+<div style="position: fixed; bottom: 30%; left: 30%;">
+<table style="width:600px; border:0;">
+<tr>
+<td style="border:none;"> 
+```{r, echo = FALSE, out.width="25%%"}
+knitr::include_graphics("C:/Users/huawei/Desktop/images/download.png")
+```
+</td>
+<td style="text-align:left; border:none;"> otta.epifania@gmail.com </td>
+</tr>
+<tr>
+<td style="border:none;"> 
+```{r, echo = FALSE, out.width="25%%"}
+knitr::include_graphics("C:/Users/huawei/Desktop/images/github.png")
+```
+</td>
+<td style="text-align:left; border:none;"> <a href="https://github.com/OttaviaE"> @OttaviaE</a>  </td>
+</tr>
+<tr>
+<td style="border:none;">
+```{r, echo = FALSE, out.width="25%%"}
+knitr::include_graphics("C:/Users/huawei/Desktop/images/twitter.png")
+```
+</td>
+<td style="text-align:left; border:none;"> <a href="https://twitter.com/ExeOttavia"> @ExeOttavia</a> </td>
+</tr>
+</table>
+</div>
+
+
+
+
+
+
+
+
