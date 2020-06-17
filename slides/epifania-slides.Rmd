@@ -52,9 +52,9 @@ How much do you like *Pepsi*?
 
 The IAT and SC-IAT effects (i.e., the difference between the associative conditions) are expressed by using the so-called *D-score*, computed as: 
 
-$$D-score = \frac{M_{conditionA} - M_{conditionB}}{sd_{pooled}}$$
+$$\text{D-score} = \frac{M_{conditionA} - M_{conditionB}}{sd_{pooled}}$$
 
-The steps that have to be undertaken to clean and prepare the data set for the computation make it an error prone procedure and raise replicability issues.
+The steps that have to be undertaken to clean and prepare the data set for the computation make it an error prone procedure, raising replicability issues.
 
 ## Why do we need an `R` package for that?
 
@@ -123,7 +123,7 @@ The objects obtained from functions `computeD()`  or `Dsciat()` can be passed to
 ```{r echo=FALSE}
 commonFunctions <- data.frame(Function = c("`descript_d()`", "`d_distr()`", 
                                            "`d_plot()`"), 
-                              Description = c("Descriptive table of the *D-score*s (even in LaTeX format!)", "Plot of the results at the individual level", "Plot of the results at the sample level"))
+                              Description = c("Descriptive table of the *D-score*s (even in LaTeX format!)", "Plot of the results at the sample level", "Plot of the results at the individual level"))
 knitr::kable(commonFunctions)
 
 ```
@@ -161,9 +161,23 @@ knitr::include_graphics("C:/Users/huawei/Desktop/images/twitter.png")
 </td>
 <td style="text-align:left; border:none;"> <a href="https://twitter.com/ExeOttavia"> @ExeOttavia</a> </td>
 </tr>
+<tr>
+<td style="border:none;">
+```{r, echo =FALSE, out.width="25%%"}
+knitr::include_graphics("C:/Users/huawei/Desktop/images/linkedin.png")
+```
+</td>
+<td style="text-align:left; border:none;"> <a href="https://www.linkedin.com/in/ottavia-epifania-612ba9b3/"> @OttaviaEpifania</a> </td>
+</tr>
+
 </table>
 </div>
 
+<div style="position: fixed; bottom: 13%; right: 15%;">
+```{r, echo = FALSE, out.width="55%%"}
+knitr::include_graphics("C:/Users/huawei/Desktop/images/implicitMeasures.png")
+```
+</div>
 
 
 

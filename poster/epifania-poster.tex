@@ -106,12 +106,11 @@
 
 \vspace{5mm}
 \large
-Within the past decades, social sciences have been showing a growing interest for the implicit investigation of attitudes and preference. This was made possible by the advent of what are called implicit measures, among which the Implicit Association Test (IAT) \cite{Greenwald1998} and the Single Category IAT (SC-IAT) \cite{karpinski2006} are the mostly common used ones \cite{review}.
-Both tests result in a differential score (the so-called \emph{D-score}) expressing respondents’ bias in performing the categorization task between conditions. While the scoring of the SC-IAT is based on one single algorithm \cite{karpinski2006}, six different algorithms are available for computing the IAT \emph{D-score} \cite{Greenwald2003}.
 
-%Despite that many R packages exist for computing IAT \emph{D-score} algorithms, no packages exist for scoring the SC-IAT. Additionally, majority of existing R packages created for the computation of IAT \emph{D-score} algorithms do not provide all the available algorithms. The packages allowing for the computation of multiple \emph{D-score} algorithms either do not offer the chance to compare their results, or do not disambiguate the specific algorithm they are computing, raising reproducibility issues \cite{ellithorpe2015}. 
+Social sciences are showing a growing interest for the implicit investigation of attitudes and preference. This was made possible by the advent of what are called implicit measures, among which the Implicit Association Test (IAT) \cite{Greenwald1998} and the Single Category IAT (SC-IAT) \cite{karpinski2006} are the mostly common used ones \cite{review}.
+Both tests result in a differential score (the so-called \emph{D-score}) expressing respondents’ bias in performing the categorization task between conditions. There is a single scoring for the SC-IAT \cite{karpinski2006} and six algorithms for scoring the IAT \cite{Greenwald2003}.
 
-\texttt{implicitMeasures} is an \texttt{R} package aimed at providing an easy to use tool to score both the IAT and the SC-IAT, and to easily compare the results obtained with the different \emph{D-score} algorithms. The package basic functioning is illustrated. 
+\texttt{implicitMeasures} is an \texttt{R} package for scoring both the IAT and the SC-IAT. The package basic functioning is illustrated. 
 
 
 \begin{center}
@@ -139,7 +138,7 @@ The IAT is usually composed of seven blocks:
 
 \vspace{3mm}
 
-The computation of the IAT \emph{D-score} is rather easy but 6 different algorithms are available:
+The computation of the IAT \emph{D-score} is rather easy but 6 algorithms are available:
 
 \begin{tabular}{lll}
 	\large	
@@ -181,7 +180,7 @@ Same assumption, same score computation as the IAT \textbf{BUT} just one target 
 \end{center}
 
 \vspace{3mm}
-The SC-IAT \emph{D-score} is computed as the IAT \emph{D-score} by considering just the responses in Blocks \emph{B2} and \emph{B4}. Error responses are replaced by the average response time added with a penalty of 400 ms. Responses faster than 350 ms are discarded. The administration might include a Response Time Window (rtw) at 1,500 ms after which the stimulus disappears and the response is considered a non-response. 
+The SC-IAT \emph{D-score} is computed as the IAT \emph{D-score} by considering just the responses in Blocks \emph{B2} and \emph{B4}. Error responses are replaced with the average response time added with a penalty of 400 ms. Responses faster than 350 ms are discarded. The administration might include a Response Time Window (rtw) at 1,500 ms after which the stimulus disappears and the response is considered a non-response. 
 
 
 
@@ -192,7 +191,8 @@ The SC-IAT \emph{D-score} is computed as the IAT \emph{D-score} by considering j
 	\huge \textbf{\textcolor{title}{IAT example}}
 \end{center}
 
-The examples are based on the toy data set included in \texttt{implicitMeasures} package. 
+The examples are based on the toy data set in \texttt{implicitMeasures} package. 
+\vspace{.4cm}
 \begin{lstlisting}
 data("raw_data") # load toy data
 iat_data <- clean_iat(raw_data, # raw data set 
@@ -211,12 +211,14 @@ Function \textbf{\textcolor{purple}{\texttt{clean\_iat()}}} results in a list, i
 iat_dscore <- computeD(iat_cleandata[[1]], #iat_clean object
                        Dscore =  "d2") #D-score algorithm
 \end{lstlisting}
-The object \textbf{\textcolor{purple}{\texttt{iat\_dscore}}} is an object of class \textcolor{purple}{\texttt{dscore}}. This object can be passed to functions \textbf{\textcolor{purple}{\texttt{descript\_d()}}} (i.e., print a table of descirptive statistics of the results, even in \LaTeX), \textbf{\textcolor{purple}{\texttt{IATrel()}}} (i.e., compute teh IAT reliability), and to functions for obtaining graphical representation of the results, either at the individual respondente with function \textbf{\textcolor{purple}{\texttt{d\_plot()}}} or at the sample level with function \textbf{\textcolor{purple}{\texttt{d\_distr()}}}: 
-%
+
+ \textbf{\textcolor{purple}{\texttt{iat\_dscore}}} is an object of class \textcolor{purple}{\texttt{dscore}}. This object can be passed to functions \textbf{\textcolor{purple}{\texttt{descript\_d()}}} (i.e., print a table of descirptive statistics of the results, even in \LaTeX), \textbf{\textcolor{purple}{\texttt{IATrel()}}} (i.e., compute teh IAT reliability), and to functions for obtaining graphical representation of the results, either at the individual respondente with function \textbf{\textcolor{purple}{\texttt{d\_plot()}}} or at the sample level with function \textbf{\textcolor{purple}{\texttt{d\_distr()}}}: 
+
+		\vspace{.4cm}
 \begin{tabular}{c c}
-		\includegraphics[width=0.5\linewidth]{dplot.pdf}
+		\includegraphics[width=0.45\linewidth]{dplot.pdf}
 	&
-		\includegraphics[width=0.5\linewidth]{ddistr.pdf} \\
+		\includegraphics[width=0.45\linewidth]{ddistr.pdf} \\
 		\textbf{\textcolor{purple}{\texttt{d\_plot()}}} & \textbf{\textcolor{purple}{\texttt{d\_distr()}}}\\
 \end{tabular}
 
@@ -230,12 +232,12 @@ multiple_scores <- multi_dscore(iat_cleandata[[1]],
 
 Function \textbf{\textcolor{purple}{\texttt{multiple\_scores()}}} results in a list containing a data set with a number of columns equal to the number of computed alrgorithms plus a column for respondnents' IDs and a graph with the distribution resulting from the different algorithms: 
 
-
+		\vspace{.4cm}
 	\begin{tabular}{l}
 		\begin{lstlisting}
 		multiple_scores$graph # Only select the graphical output
 		\end{lstlisting}\\
-		
+		\\
 		\multicolumn{1}{c}{ \includegraphics[width=0.5\linewidth]{multid.pdf}}  \\
 	\end{tabular}
 
@@ -248,8 +250,7 @@ Function \textbf{\textcolor{purple}{\texttt{multiple\_scores()}}} results in a l
 	\huge \textbf{\textcolor{title}{SC-IAT example}}
 \end{center}
 
-The \texttt{raw\_data} toy data set contains data from two distinct data SC-IATs. Data from both SC-IATs can be simulatenously clenaed and prepared for the computation by using \textcolor{purple}{\texttt{clean\_sciat()}} function: 
-
+The \texttt{raw\_data} toy data set contains data from two distinct data SC-IATs. Data from both SC-IATs can be simulatenously clenaed and prepared for the computation by using \textbf{\textcolor{purple}{\texttt{clean\_sciat()}}} function: 
 \begin{lstlisting}
 data("raw_data") # load toy data 
 sciat_data <- clean_sciat(raw_data, # raw data set
@@ -266,7 +267,8 @@ sciat_data <- clean_sciat(raw_data, # raw data set
                       "reminder1")) #Trials to eliminate
 \end{lstlisting}	
 
-The object resulting from \textbf{\textcolor{purple}{\texttt{clean\_sciat()}}} is a list containing two data sets of class \textcolor{purple}{\texttt{sciat\_clean}}, one for each SC-IAT. These data sets can be individually passed to \textbf{\textcolor{purple}{\texttt{Dsciat()}}} for the computation of the SC-IAT \emph{D-score}: 
+ \textbf{\textcolor{purple}{\texttt{clean\_sciat()}}} results in a list containing two data sets of class \textcolor{purple}{\texttt{sciat\_clean}}, one for each SC-IAT. These data sets can be individually passed to \textbf{\textcolor{purple}{\texttt{Dsciat()}}} to compute the SC-IAT \emph{D-score}: 
+\vspace{.4cm}
 \begin{lstlisting}
  d_sciat1 <- Dsciat(sciat_data[[1]], # 1st SC-IAT data
                    mappingA = "test.sc_dark.Darkbad", # Mapping A Label
@@ -278,20 +280,21 @@ The object resulting from \textbf{\textcolor{purple}{\texttt{clean\_sciat()}}} i
                    non_response = "alert") # Label for responses over rtw
 \end{lstlisting}	
 
-The objects obtained from \textbf{\textcolor{purple}{\texttt{Dsciat()}}} function have class \textcolor{purple}{\texttt{dsciat}} and they can be passed to functions \textbf{\textcolor{purple}{\texttt{descript\_d()}}}, \textbf{\textcolor{purple}{\texttt{d\_plot()}}}, and \textbf{\textcolor{purple}{\texttt{d\_distr()}}}, as the objects obtained from \textbf{\textcolor{purple}{\texttt{computeD()}}} function. 
+The objects obtained from \textbf{\textcolor{purple}{\texttt{Dsciat()}}} function have class \textcolor{purple}{\texttt{dsciat}} and they can be passed to functions \textbf{\textcolor{purple}{\texttt{descript\_d()}}}, \textbf{\textcolor{purple}{\texttt{d\_plot()}}}, and \textbf{\textcolor{purple}{\texttt{d\_distr()}}}. 
 
-Results obtained from multiple SC-IATs can be plotted together by using \textcolor{purple}{\texttt{multi\_dsciat()}}: 
+Results obtained from multiple SC-IATs can be plotted together by using \textbf{\textcolor{purple}{\texttt{multi\_dsciat()}}}: 
 
+		\vspace{.4cm}
 \begin{tabular}{c c}
-	\includegraphics[width=0.5\linewidth]{sciatDefault.pdf}
+	\includegraphics[width=0.45\linewidth]{sciatDefault.pdf}
 	&
-	\includegraphics[width=0.5\linewidth]{multiSciatPoints.pdf} \\
+	\includegraphics[width=0.45\linewidth]{multiSciatPoints.pdf} \\
 	\textbf{\textcolor{purple}{\texttt{multi\_dsciat()}}}  Default settings & \textbf{\textcolor{purple}{\texttt{multi\_dsciat()}}} Customized plot\\
 \end{tabular}
 
 \vspace{5mm}
 
-\textcolor{title}{Last but not least:} All graphical functions are based on \texttt{ggplot2} \cite{ggplot2} and can be further modified by the users! 
+\textcolor{title}{Last but not least:} All graphical functions are based on \texttt{ggplot2} \cite{ggplot2} and can be further modified by the useRs! 
 
 \vspace{5mm}
 ---------------------------------------
