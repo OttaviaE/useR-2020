@@ -1,7 +1,7 @@
 ---
-title: "Scoring the implicit:"
-subtitle: "The `implicitMeasures` package"
-author: "Ottavia M. Epifania, Pasquale Anselmi, Egidio Robusto"
+title: "Scoring the implicit: The `implicitMeasures` package"
+subtitle: "Poster Presentation @useR!2020"
+author: "Ottavia M. Epifania, Pasquale Anselmi, & Egidio Robusto"
 date: "University of Padova (IT)"
 header-includes: 
 output:
@@ -55,12 +55,6 @@ The IAT and SC-IAT effects (i.e., the difference between the associative conditi
 $$\text{D-score} = \frac{M_{conditionA} - M_{conditionB}}{sd_{pooled}}$$
 
 The steps that have to be undertaken to clean and prepare the data set for the computation make it an error prone procedure, raising replicability issues.
-
-## Why do we need an `R` package for that?
-
-- SPSS and Inquisit scripts: Not open source, Not easy to use, Bounded to specific administration procedures
-
-- `R` packages:  Require a specific column arrangement, do not provide graphical representation of the results, do not clarify which data cleaning procedures are implementing, and compute only IAT *D-score*
 
 ## `implicitMeasures`
 
@@ -174,6 +168,7 @@ knitr::include_graphics("C:/Users/huawei/Desktop/images/linkedin.png")
 </div>
 
 <div style="position: fixed; bottom: 13%; right: 15%;">
+
 ```{r, echo = FALSE, out.width="55%%"}
 knitr::include_graphics("C:/Users/huawei/Desktop/images/implicitMeasures.png")
 ```

@@ -45,7 +45,8 @@
 	basicstyle=\small\ttfamily,
 	stringstyle=\color{blue},
 	%otherkeywords={0,1,2,3,4,5,6,7,8,9},
-	morekeywords={TRUE,FALSE, clean\_iat, d\_plot, d\_distr},	
+	morekeywords={TRUE,FALSE, clean\_iat, d\_plot, d\_distr, non, clean, iat, mappingA, mappingB, sbj, id, block, mapA, mapB, test, practice, latency, id, trial, eliminate, accuracy, iat\_data, clean\_sciat, dscore, Dsciat, 
+	sciat, d, sciat1, sciat2, multiple, scores,1,2, multi, ds, graph},	
 	deletekeywords={<, -, data, \_, order, plot, col},
 	keywordstyle=\color{purple}\bfseries,
 	commentstyle=\color{green!40!blue},
@@ -71,7 +72,7 @@
 \veryHuge \textcolor{title}{\textbf{Scoring the implicit:}}
 \veryHuge\textcolor{title}{\textbf{The \texttt{implicitMeasures} package}}\\[2cm] % Subtitle	
 
-\LARGE \textbf{Ottavia M. Epifania, Egidio Robusto, \& Pasquale Anselmi}\\[0.5cm] % Author(s)
+\LARGE \textbf{Ottavia M. Epifania, Pasquale Anselmi, \& Egidio Robusto}\\[0.5cm] % Author(s)
 \Large University of Padova\\[0.4cm] % University/organization
 \Large \texttt{marinaottavia.epifania@phd.unipd.it}\\	
 	\end{center}
@@ -95,6 +96,8 @@
 \setlength{\columnseprule}{0.4pt}
  % This is how many columns your poster will be broken into, a portrait poster is generally split into 2 columns
 
+\vspace{5mm}
+
 \begin{multicols*}{3}
 %----------------------------------------------------------------------------------------
 %	ABSTRACT
@@ -107,18 +110,20 @@
 \vspace{5mm}
 \large
 
-Social sciences are showing a growing interest for the implicit investigation of attitudes and preference. This was made possible by the advent of what are called implicit measures, among which the Implicit Association Test (IAT) \cite{Greenwald1998} and the Single Category IAT (SC-IAT) \cite{karpinski2006} are the mostly common used ones \cite{review}.
+Social sciences are showing a growing interest for the implicit investigation of attitudes. The Implicit Association Test (IAT) \cite{Greenwald1998} and the Single Category IAT (SC-IAT) \cite{karpinski2006} are the mostly common employed measures for this aim \cite{review}.
 Both tests result in a differential score (the so-called \emph{D-score}) expressing respondents’ bias in performing the categorization task between conditions. There is a single scoring for the SC-IAT \cite{karpinski2006} and six algorithms for scoring the IAT \cite{Greenwald2003}.
 
 \texttt{implicitMeasures} is an \texttt{R} package for scoring both the IAT and the SC-IAT. The package basic functioning is illustrated. 
 
-
+\vspace{5mm}
 \begin{center}
 	\Large \textbf{\textcolor{title}{The Implicit Association Test}}
 \end{center}
+\vspace{5mm}
 
 The IAT is usually composed of seven blocks:
 
+\vspace{0.4cm}
 \begin{center}
 	\begin{tabular}{llll}
 		\multicolumn{4}{c}{IAT structure \label{tab:iat}}\\
@@ -136,10 +141,11 @@ The IAT is usually composed of seven blocks:
 	\end{tabular}
 \end{center}
 
-\vspace{3mm}
+\vspace{5mm}
 
 The computation of the IAT \emph{D-score} is rather easy but 6 algorithms are available:
 
+\vspace{5mm}
 \begin{tabular}{lll}
 	\large	
 	$\text{\emph{D-score}} = \frac{M_{\text{MappingA}} - M_{\text{MappingB}}}{sd_{\text{pooled}}}$
@@ -159,12 +165,15 @@ The computation of the IAT \emph{D-score} is rather easy but 6 algorithms are av
 	\end{tabular}\\
 \end{tabular}
 
-\vspace{3mm}
+\vspace{5mm}
 \begin{center}
 	\Large \textbf{\textcolor{title}{The Single Category Implicit Association Test}}
 \end{center}
+\vspace{5mm}
 
 Same assumption, same score computation as the IAT \textbf{BUT} just one target object: 
+\vspace{5mm}
+
 \begin{center}
 	\begin{tabular}{llll}
 		\multicolumn{4}{c}{SC-IAT structure \label{tab:sciat}}\\
@@ -179,7 +188,7 @@ Same assumption, same score computation as the IAT \textbf{BUT} just one target 
 	\end{tabular}
 \end{center}
 
-\vspace{3mm}
+\vspace{5mm}
 The SC-IAT \emph{D-score} is computed as the IAT \emph{D-score} by considering just the responses in Blocks \emph{B2} and \emph{B4}. Error responses are replaced with the average response time added with a penalty of 400 ms. Responses faster than 350 ms are discarded. The administration might include a Response Time Window (rtw) at 1,500 ms after which the stimulus disappears and the response is considered a non-response. 
 
 
@@ -192,10 +201,10 @@ The SC-IAT \emph{D-score} is computed as the IAT \emph{D-score} by considering j
 \end{center}
 
 The examples are based on the toy data set in \texttt{implicitMeasures} package. 
-\vspace{.4cm}
+\vspace{3mm}
 \begin{lstlisting}
 data("raw_data") # load toy data
-iat_data <- clean_iat(raw_data, # raw data set 
+iat <- clean_iat(raw_data, # raw data set 
            sbj_id = "Participant", #Respondents' IDs
            block_id = "blockcode", #Blocks labels
            mapA_practice = "practice.iat.Milkbad", #Label B3
@@ -205,34 +214,38 @@ iat_data <- clean_iat(raw_data, # raw data set
            latency_id = "latency", #Response times
            accuracy_id = "correct", #Accuracy responses)
 \end{lstlisting}
-
-Function \textbf{\textcolor{purple}{\texttt{clean\_iat()}}} results in a list, in which the first object is a data frame with class \textcolor{purple}{\texttt{iat\_clean}}. This data set can be passed to function \textbf{\textcolor{purple}{\texttt{computeD()}}}: 
-\begin{lstlisting}
-iat_dscore <- computeD(iat_cleandata[[1]], #iat_clean object
-                       Dscore =  "d2") #D-score algorithm
-\end{lstlisting}
-
- \textbf{\textcolor{purple}{\texttt{iat\_dscore}}} is an object of class \textcolor{purple}{\texttt{dscore}}. This object can be passed to functions \textbf{\textcolor{purple}{\texttt{descript\_d()}}} (i.e., print a table of descirptive statistics of the results, even in \LaTeX), \textbf{\textcolor{purple}{\texttt{IATrel()}}} (i.e., compute teh IAT reliability), and to functions for obtaining graphical representation of the results, either at the individual respondente with function \textbf{\textcolor{purple}{\texttt{d\_plot()}}} or at the sample level with function \textbf{\textcolor{purple}{\texttt{d\_distr()}}}: 
-
-		\vspace{.4cm}
-\begin{tabular}{c c}
-		\includegraphics[width=0.45\linewidth]{dplot.pdf}
-	&
-		\includegraphics[width=0.45\linewidth]{ddistr.pdf} \\
-		\textbf{\textcolor{purple}{\texttt{d\_plot()}}} & \textbf{\textcolor{purple}{\texttt{d\_distr()}}}\\
-\end{tabular}
-
 \vspace{3mm}
 
-The object with class \textcolor{purple}{\texttt{iat\_clean}} can also be passed to function \textcolor{purple}{\texttt{multi\_dscore()}}, which simultaneously compute multiple \emph{D-score} algorithms: 
+Function \textbf{\textcolor{purple}{\texttt{clean\_iat()}}} results in a list, in which the first object is a data frame with class \textcolor{purple}{\texttt{iat\_clean}}. This data set can be passed to function \textbf{\textcolor{purple}{\texttt{computeD()}}}:
+ \vspace{3mm}
 \begin{lstlisting}
-multiple_scores <- multi_dscore(iat_cleandata[[1]], 
-	            ds = `error-inflation`) #Which algorithm?
+iat_dscore <- computeD(iat[[1]], #iat_clean object
+                       Dscore =  "d2") #D-score algorithm
 \end{lstlisting}
+\vspace{3mm}
+
+ \textbf{\textcolor{purple}{\texttt{iat\_dscore}}} is an object of class \textcolor{purple}{\texttt{dscore}}. This object can be passed to functions \textbf{\textcolor{purple}{\texttt{descript\_d()}}} (i.e., print a table of descirptive statistics of the results, even in \LaTeX), \textbf{\textcolor{purple}{\texttt{IATrel()}}} (i.e., compute teh IAT reliability), and to functions for obtaining graphical representation of the results, either at the individual respondente with function \textbf{\textcolor{purple}{\texttt{d\_plot()}}} or at the sample level with function \textbf{\textcolor{purple}{\texttt{d\_distr()}}}: 
+\vspace{3mm}
+		\begin{center}
+			\begin{tabular}{c c}
+				\includegraphics[width=0.40\linewidth]{dplot.pdf}
+				&
+				\includegraphics[width=0.40\linewidth]{ddistr.pdf} \\
+				\textbf{\textcolor{purple}{\texttt{d\_plot()}}} & \textbf{\textcolor{purple}{\texttt{d\_distr()}}}\\
+			\end{tabular}
+		\end{center}
+\vspace{3mm}
+
+The object with class \textcolor{purple}{\texttt{iat\_clean}} can also be passed to function \textbf{\textcolor{purple}{\texttt{multi\_dscore()}}}, which simultaneously compute multiple \emph{D-score} algorithms: 
+\vspace{3mm}
+\begin{lstlisting}
+multiple_scores <- multi_dscore(iat[[1]], 
+	            ds = "error-inflation") #Which algorithm?
+\end{lstlisting}
+\vspace{3mm}
 
 Function \textbf{\textcolor{purple}{\texttt{multiple\_scores()}}} results in a list containing a data set with a number of columns equal to the number of computed alrgorithms plus a column for respondnents' IDs and a graph with the distribution resulting from the different algorithms: 
-
-		\vspace{.4cm}
+\vspace{3mm}
 	\begin{tabular}{l}
 		\begin{lstlisting}
 		multiple_scores$graph # Only select the graphical output
@@ -251,9 +264,10 @@ Function \textbf{\textcolor{purple}{\texttt{multiple\_scores()}}} results in a l
 \end{center}
 
 The \texttt{raw\_data} toy data set contains data from two distinct data SC-IATs. Data from both SC-IATs can be simulatenously clenaed and prepared for the computation by using \textbf{\textcolor{purple}{\texttt{clean\_sciat()}}} function: 
+\vspace{3mm}
 \begin{lstlisting}
 data("raw_data") # load toy data 
-sciat_data <- clean_sciat(raw_data, # raw data set
+sciat <- clean_sciat(raw_data, # raw data set
                       sbj_id = "Participant", #Column with respondents' IDs
                       block_id = "blockcode", #Column with blocks labels
                       latency_id = "latency", #Column with latency responses
@@ -266,31 +280,35 @@ sciat_data <- clean_sciat(raw_data, # raw data set
                       trial_eliminate = c("reminder", 
                       "reminder1")) #Trials to eliminate
 \end{lstlisting}	
+\vspace{3mm}
 
  \textbf{\textcolor{purple}{\texttt{clean\_sciat()}}} results in a list containing two data sets of class \textcolor{purple}{\texttt{sciat\_clean}}, one for each SC-IAT. These data sets can be individually passed to \textbf{\textcolor{purple}{\texttt{Dsciat()}}} to compute the SC-IAT \emph{D-score}: 
-\vspace{.4cm}
+\vspace{3mm}
 \begin{lstlisting}
- d_sciat1 <- Dsciat(sciat_data[[1]], # 1st SC-IAT data
+ d_sciat1 <- Dsciat(sciat[[1]], # 1st SC-IAT data
                    mappingA = "test.sc_dark.Darkbad", # Mapping A Label
                    mappingB = "test.sc_dark.Darkgood", # Mapping B Label
                   non_response = "alert") # Label for responses over rtw
- d_sciat2 <- Dsciat(sciat_data[[2]], # 2nd SC-IAT data
+ d_sciat2 <- Dsciat(sciat[[2]], # 2nd SC-IAT data
                    mappingA = "test.sc_milk.Milkbad", # Mapping A Label
                    mappingB = "test.sc_milk.Milkgood", # Mapping B Label
                    non_response = "alert") # Label for responses over rtw
 \end{lstlisting}	
+\vspace{3mm}
 
-The objects obtained from \textbf{\textcolor{purple}{\texttt{Dsciat()}}} function have class \textcolor{purple}{\texttt{dsciat}} and they can be passed to functions \textbf{\textcolor{purple}{\texttt{descript\_d()}}}, \textbf{\textcolor{purple}{\texttt{d\_plot()}}}, and \textbf{\textcolor{purple}{\texttt{d\_distr()}}}. 
+\textbf{\textcolor{purple}{\texttt{Dsciat()}}} results in objects of class \textcolor{purple}{\texttt{dsciat}}, which can be passed to functions \textbf{\textcolor{purple}{\texttt{descript\_d()}}}, \textbf{\textcolor{purple}{\texttt{d\_plot()}}}, and \textbf{\textcolor{purple}{\texttt{d\_distr()}}}. 
 
 Results obtained from multiple SC-IATs can be plotted together by using \textbf{\textcolor{purple}{\texttt{multi\_dsciat()}}}: 
+\vspace{3mm}
+		\begin{center}
+		\begin{tabular}{c c}
+			\includegraphics[width=0.40\linewidth]{sciatDefault.pdf}
+			&
+			\includegraphics[width=0.40\linewidth]{multiSciatPoints.pdf} \\
+			\textbf{\textcolor{purple}{\texttt{multi\_dsciat()}}}  (Default) & \textbf{\textcolor{purple}{\texttt{multi\_dsciat()}}} (Customized) \\
+		\end{tabular}
+		\end{center}
 
-		\vspace{.4cm}
-\begin{tabular}{c c}
-	\includegraphics[width=0.45\linewidth]{sciatDefault.pdf}
-	&
-	\includegraphics[width=0.45\linewidth]{multiSciatPoints.pdf} \\
-	\textbf{\textcolor{purple}{\texttt{multi\_dsciat()}}}  Default settings & \textbf{\textcolor{purple}{\texttt{multi\_dsciat()}}} Customized plot\\
-\end{tabular}
 
 \vspace{5mm}
 
